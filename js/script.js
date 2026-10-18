@@ -709,12 +709,9 @@ function isOrderDelivered(item) {
 function paketDiterimaPreviewHtml(item) {
     if (!isOrderDelivered(item)) return '';
     return `
-        <div style="margin-top: 0.5rem; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.75rem; background: #f0fdf4; border-radius: 6px; border: 1px solid #bbf7d0; max-width: fit-content; font-size: 0.82rem;">
-            <button type="button" onclick="showCoverModal('assets/img/paket diterima.jpg', 'Bukti Penerimaan Paket')" style="background:#166534;color:#fff;border:none;border-radius:4px;padding:0.3rem 0.75rem;font-size:0.82rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:0.25rem;">
-                &#128065; Lihat Bukti Penerimaan Paket
-            </button>
-            <span style="color:#166534;">Paket telah diterima oleh penerima.</span>
-        </div>
+        <button type="button" onclick="showCoverModal('assets/img/paket diterima.jpg', 'Bukti Penerima Paket')" style="margin-top:0.25rem;display:inline-flex;align-items:center;gap:0.25rem;background:#166534;color:#fff;border:none;border-radius:4px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:600;cursor:pointer;">
+            &#128065; Lihat Bukti Penerima Paket
+        </button>
     `;
 }
 
@@ -843,14 +840,13 @@ function initTrackingSearch() {
             timelineContainer.innerHTML = logs.map((step, idx) => {
                 let mainDesc = step.keterangan;
                 let subDesc = '';
-                let bukitBox = '';
 
                 if (step.keterangan.includes('. Penerima:')) {
                     const parts = step.keterangan.split('. Penerima:');
                     mainDesc = parts[0];
                     subDesc = 'Penerima: ' + parts[1].trim();
                     if (isOrderDelivered(item)) {
-                        bukitBox = paketDiterimaPreviewHtml(item);
+                        subDesc += paketDiterimaPreviewHtml(item);
                     }
                 } else if (step.keterangan.includes('. Pengirim:')) {
                     const parts = step.keterangan.split('. Pengirim:');
@@ -867,7 +863,6 @@ function initTrackingSearch() {
                         </div>
                         <div class="tracking-step-time">${step.waktu}</div>
                     </div>
-                    ${bukitBox}
                 `;
             }).join('');
         }
