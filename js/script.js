@@ -1256,7 +1256,8 @@ function initTambahBahanAjar() {
 
         const isDuplicate = typeof dataBahanAjar !== 'undefined'
             && dataBahanAjar.some(item => item.kodeBarang === kodeBarang && item.kodeBarang !== editingKodeBarang);
-
+        
+        // Validasi input
         if (!kodeLokasi || !kodeBarang || !namaBarang || Number.isNaN(edisi) || Number.isNaN(stok)) {
             Object.values(fields).forEach(el => el && el.classList.add('input-error'));
             // Inline error messages
@@ -1281,7 +1282,6 @@ function initTambahBahanAjar() {
             if (!namaBarang) showFieldError(fields.namaBarang, 'Nama Bahan Ajar wajib diisi.');
             if (Number.isNaN(edisi)) showFieldError(fields.edisi, 'Edisi harus berupa angka.');
             if (Number.isNaN(stok)) showFieldError(fields.stok, 'Jumlah Stok harus berupa angka.');
-            showToast('error', 'Semua kolom wajib diisi, dan Edisi serta Jumlah Stok harus berupa angka.');
             return;
         }
 
