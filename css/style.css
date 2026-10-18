@@ -386,7 +386,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
     text-decoration: none;
     color: #ffffff;
 }
@@ -401,27 +401,28 @@ body {
 }
 
 .login-brand-top span {
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-size: 1.35rem;
+    font-weight: 800;
     letter-spacing: 0.5px;
+    color: #ffffff;
 }
 
 .login-card-minimal {
     background-color: #ffffff;
-    border-radius: 14px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 24px 32px -8px rgba(0, 0, 0, 0.3), 0 8px 12px -4px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 420px;
-    padding: 2.5rem 2.25rem 2rem;
+    padding: 2.75rem 2.5rem 2.25rem;
     position: relative;
     box-sizing: border-box;
 }
 
 .login-heading {
-    font-size: 1.75rem;
+    font-size: 1.85rem;
     font-weight: 800;
     color: #1e293b;
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
     text-align: left;
     letter-spacing: -0.5px;
 }
@@ -430,9 +431,11 @@ body {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    position: relative;
     border-bottom: 1.5px solid #cbd5e1;
-    padding: 0.6rem 0.2rem;
-    margin-bottom: 1.5rem;
+    padding: 0.85rem 0.5rem;
+    margin-bottom: 1.75rem;
+    min-height: 56px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -444,10 +447,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 26px;
-    height: 26px;
+    width: 34px;
+    height: 34px;
     color: #64748b;
-    margin-right: 0.85rem;
+    margin-right: 1rem;
     flex-shrink: 0;
     transition: color 0.2s ease;
 }
@@ -458,19 +461,48 @@ body {
 
 .input-line-group input,
 .input-line-group select {
-    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
     border: none;
     outline: none;
     background: transparent;
     font-size: 1rem;
     color: #1e293b;
     font-family: inherit;
-    padding: 0.2rem 0;
+    padding: 0.25rem 0;
+    line-height: 1.4;
 }
 
 .input-line-group input::placeholder {
     color: #94a3b8;
     font-weight: 400;
+}
+
+.input-eye-toggle {
+    background: transparent;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+
+.input-eye-toggle:hover {
+    color: var(--primary-color);
+    background: rgba(0, 75, 147, 0.05);
+    border-radius: 4px;
+}
+
+.input-eye-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
 }
 
 .link-forgot-pw {
@@ -479,9 +511,9 @@ body {
     color: #0284c7;
     font-size: 0.9rem;
     text-decoration: none;
-    margin-top: -0.5rem;
-    margin-bottom: 1.75rem;
-    font-weight: 500;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
     cursor: pointer;
     transition: color 0.15s ease;
 }
@@ -494,21 +526,22 @@ body {
 .btn-yellow-submit {
     display: block;
     width: 100%;
-    background-color: #f4be38;
+    background-color: #fdb813;
     color: #24292f;
     border: none;
-    border-radius: 8px;
-    padding: 0.85rem 1.5rem;
+    border-radius: 10px;
+    padding: 0.9rem 1.5rem;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     text-align: center;
     transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 4px rgba(244, 190, 56, 0.3);
+    box-shadow: 0 2px 4px rgba(253, 184, 19, 0.35);
 }
 
 .btn-yellow-submit:hover {
-    background-color: #e5af2b;
+    background-color: #e09f06;
+    box-shadow: 0 4px 8px rgba(253, 184, 19, 0.45);
 }
 
 .btn-yellow-submit:active {
@@ -517,7 +550,7 @@ body {
 
 .register-link-wrapper {
     text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 1.75rem;
 }
 
 .link-register {
@@ -954,6 +987,7 @@ body {
 .search-box-modern {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     background: #ffffff;
     border: 1.5px solid #cbd5e1;
     border-radius: 10px;
@@ -1561,30 +1595,7 @@ select.form-input {
 }
 
 
-/* Eye toggle password icon - clean no background */
-.input-eye-toggle {
-    background: transparent;
-    border: none;
-    padding: 0.25rem;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    color: var(--text-secondary);
-}
 
-.input-eye-toggle:hover {
-    color: var(--primary-color);
-    background: rgba(0, 75, 147, 0.05);
-    border-radius: 4px;
-}
-
-.input-eye-toggle svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-}
 
 /* Danger button for hapus modal */
 .btn-danger {
@@ -1687,14 +1698,50 @@ select.form-input {
     background-color: #fef2f2 !important;
 }
 
+/* Input line group:{red border saat error, tanpa kotak merah pada inputnya */
+.input-line-group .input-error {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.input-line-group:has(.input-error) {
+    border-bottom-color: var(--danger-color);
+}
+
+.input-line-group:has(.input-error) .input-icon {
+    color: var(--danger-color);
+}
+
+.input-line-group:has(.inline-error) {
+    margin-bottom: 2.9rem;
+}
+
 .inline-error {
+    flex: 0 0 100%;
     width: 100%;
+    min-width: 0;
     color: var(--danger-color);
     font-size: 0.8rem;
     font-weight: 500;
-    margin-top: 0.35rem;
+    line-height: 1.35;
+    margin-top: 0.6rem;
+    padding-left: 0.25rem;
     display: block;
+    order: 99;
     animation: errorFadeIn 0.2s ease-out;
+}
+
+/* Di line group, error keluar dari flow agar muncul di BAWAH garis, bukan di atasnya */
+.input-line-group .inline-error {
+    position: absolute;
+    top: 100%;
+    left: 0.5rem;
+    right: 0.5rem;
+    z-index: 2;
+    flex: none;
+    width: auto;
+    margin-top: 0.4rem;
+    padding-left: 0;
 }
 
 @keyframes errorFadeIn {
