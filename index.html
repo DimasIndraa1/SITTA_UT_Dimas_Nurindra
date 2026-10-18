@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITTA - Selamat Datang | Universitas Terbuka</title>
+    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="icon" type="image/svg+xml" href="assets/Universitas Terbuka (UT) Logo - Colored - zonalogo.com.svg">
+</head>
+<body class="login-body">
+
+    <a href="index.html" class="login-brand-top">
+        <img src="assets/Universitas Terbuka (UT) Logo - Colored - zonalogo.com.svg" alt="Logo UT">
+        <span>SITTA UT</span>
+    </a>
+
+    <div class="login-card-minimal">
+
+        <div id="loginView" class="auth-view">
+            <h2 class="login-heading">Selamat Datang</h2>
+
+            <div id="loginAlert" class="alert-feedback"></div>
+
+            <form id="formLogin" autocomplete="off">
+                
+                <div class="input-line-group">
+                    <span class="input-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </span>
+                    <input 
+                        type="email" 
+                        id="loginEmail" 
+                        placeholder="Email" 
+                        required 
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="input-line-group">
+                    <span class="input-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="transform: rotate(-15deg);">
+                            <path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                    </span>
+                    <input 
+                        type="password" 
+                        id="loginPassword" 
+                        placeholder="Password" 
+                        required 
+                        autocomplete="current-password"
+                    >
+                    <button type="button" class="input-eye-toggle" data-password-toggle="loginPassword" aria-label="Tampilkan password">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <a href="#" id="btnShowForgot" class="link-forgot-pw">Lupa password ?</a>
+
+                <button type="submit" class="btn-yellow-submit">Masuk</button>
+
+                <div class="register-link-wrapper">
+                    <a href="#" id="btnShowRegister" class="link-register">Belum punya akun?</a>
+                </div>
+            </form>
+
+            <div class="demo-accounts-section">
+                <div class="demo-accounts-title">
+                    <span>Akun Demo (dataPengguna)</span>
+                    <span style="font-size: 0.7rem; font-weight: normal; color: #64748b;">Klik untuk isi otomatis</span>
+                </div>
+                <div class="demo-chips">
+                    <div class="demo-chip-item" onclick="fillDemo('rina@ut.ac.id', 'rina123')">
+                        <span><strong>rina@ut.ac.id</strong> (rina123)</span>
+                        <span class="demo-chip-role">UPBJJ Jakarta</span>
+                    </div>
+                    <div class="demo-chip-item" onclick="fillDemo('agus@ut.ac.id', 'agus123')">
+                        <span><strong>agus@ut.ac.id</strong> (agus123)</span>
+                        <span class="demo-chip-role">UPBJJ Makassar</span>
+                    </div>
+                    <div class="demo-chip-item" onclick="fillDemo('admin@ut.ac.id', 'admin123')">
+                        <span><strong>admin@ut.ac.id</strong> (admin123)</span>
+                        <span class="demo-chip-role">Administrator</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="forgotView" class="auth-view hidden-view">
+            <h2 class="login-heading">Lupa Password</h2>
+            <p style="font-size: 0.85rem; color: #64748b; margin-top: -1.25rem; margin-bottom: 1.5rem;">
+                Masukkan email Anda yang terdaftar pada sistem SITTA untuk memulihkan kata sandi.
+            </p>
+
+            <div id="forgotAlert" class="alert-feedback"></div>
+
+            <form id="formForgot">
+                <div class="input-line-group">
+                    <span class="input-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </span>
+                    <input 
+                        type="email" 
+                        id="forgotEmail" 
+                        placeholder="Email terdaftar" 
+                        required
+                    >
+                </div>
+
+                <div id="forgotResetSection" style="display: none; margin-bottom: 1.25rem; background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <div style="font-size: 0.85rem; margin-bottom: 0.5rem; color: #1e293b;" id="forgotUserFoundText"></div>
+                    <div class="input-line-group" style="margin-bottom: 0.75rem;">
+                        <span class="input-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="transform: rotate(-15deg);">
+                                <path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                            </svg>
+                        </span>
+                        <input type="password" id="forgotNewPassword" placeholder="Kata sandi baru">
+                        <button type="button" class="input-eye-toggle" data-password-toggle="forgotNewPassword" aria-label="Tampilkan kata sandi baru">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <button type="button" id="btnSaveNewPassword" class="btn-yellow-submit" style="padding: 0.6rem 1rem; font-size: 0.9rem;">
+                        Simpan Password Baru
+                    </button>
+                </div>
+
+                <button type="submit" id="btnCheckForgotEmail" class="btn-yellow-submit">Cek Akun Saya</button>
+                <button type="button" class="btn-outline-back btnBackToLogin">&larr; Kembali ke Login</button>
+            </form>
+        </div>
+
+        <div id="registerView" class="auth-view hidden-view">
+            <h2 class="login-heading">Daftar Akun Baru</h2>
+            <p style="font-size: 0.85rem; color: #64748b; margin-top: -1.25rem; margin-bottom: 1.5rem;">
+                Daftarkan akun SITTA Anda untuk mengakses katalog & pelacakan bahan ajar.
+            </p>
+
+            <div id="registerAlert" class="alert-feedback"></div>
+
+            <form id="formRegister">
+                
+                <div class="input-line-group">
+                    <span class="input-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </span>
+                    <input type="text" id="regNama" placeholder="Nama Lengkap" required>
+                </div>
+
+                <div class="input-line-group">
+                    <span class="input-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </span>
+                    <input type="email" id="regEmail" placeholder="Email (@ut.ac.id)" required>
+                </div>
+
+                <div class="input-line-group">
+                    <span class="input-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                        </svg>
+                    </span>
+                    <select id="regRole" required>
+                        <option value="UPBJJ-UT">UPBJJ-UT</option>
+                        <option value="Mahasiswa">Mahasiswa</option>
+                        <option value="Fakultas">Fakultas</option>
+                        <option value="Puslaba">Puslaba</option>
+                        <option value="Administrator">Administrator</option>
+                    </select>
+                </div>
+
+                <div class="input-line-group">
+                    <span class="input-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </span>
+                    <input type="text" id="regLokasi" placeholder="Lokasi (misal: UPBJJ Bandung / FISIP)" required>
+                </div>
+
+                <div class="input-line-group">
+                    <span class="input-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="transform: rotate(-15deg);">
+                            <path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                    </span>
+                    <input type="password" id="regPassword" placeholder="Password" required>
+                    <button type="button" class="input-eye-toggle" data-password-toggle="regPassword" aria-label="Tampilkan password">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="input-line-group">
+                    <span class="input-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="transform: rotate(-15deg);">
+                            <path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                    </span>
+                    <input type="password" id="regConfirmPassword" placeholder="Konfirmasi Password" required>
+                    <button type="button" class="input-eye-toggle" data-password-toggle="regConfirmPassword" aria-label="Tampilkan konfirmasi password">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <button type="submit" class="btn-yellow-submit">Daftar Sekarang</button>
+                <div class="register-link-wrapper">
+                    <a href="#" class="link-register btnBackToLogin">Sudah punya akun? Masuk</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js?v=5"></script>
+</body>
+</html>
+
+

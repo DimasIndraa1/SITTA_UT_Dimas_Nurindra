@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITTA - Tracking Pengiriman | Universitas Terbuka</title>
+    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="icon" type="image/svg+xml" href="assets/Universitas Terbuka (UT) Logo - Colored - zonalogo.com.svg">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="dashboard.html" class="brand-wrapper">
+                <img src="assets/Universitas Terbuka (UT) Logo - Colored - zonalogo.com.svg" alt="Logo UT" class="brand-logo">
+                <div class="brand-title">
+                    <h1>SITTA UT</h1>
+                    <span>Sistem Informasi Tiras & Distribusi Bahan Ajar</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+                    <li><a href="tracking.html" class="active">Tracking Pengiriman</a></li>
+                    <li class="dropdown">
+                        <button type="button" class="dropdown-btn">
+                            Laporan <span style="font-size: 0.75rem;">&#9662;</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="dashboard.html#monitoring-do">Monitoring Progress DO Bahan Ajar</a></li>
+                            <li><a href="dashboard.html#rekap-stok">Rekap Bahan Ajar</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="dashboard.html#histori-transaksi">Histori Transaksi Bahan Ajar</a></li>
+                    <li><a href="index.html" class="btn-logout">Keluar</a></li>
+                </ul>
+            </div>
+    </header>
+
+    <main class="main-container">
+        <div class="page-header">
+            <div>
+                <h2>Pelacakan Distribusi Bahan Ajar</h2>
+                <p>Pantau posisi dan status perjalanan Delivery Order (DO) bahan ajar secara berkala.</p>
+            </div>
+            <div>
+                <span class="badge badge-info" style="font-size: 0.9rem; padding: 0.4rem 0.9rem;">
+                    Layanan Ekspedisi: JNE & POS Indonesia
+                </span>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 1.5rem 1.75rem;">
+            <h3 class="card-title" style="margin-bottom: 0.85rem;">Cari Paket Pengiriman</h3>
+            
+            <div class="search-box-modern">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <input 
+                    type="text" 
+                    id="trackingNumber" 
+                    placeholder="Masukkan Nomor DO (misal: 2023001234 atau 2023005678)"
+                    value="2023001234"
+                    autocomplete="off"
+                >
+                <button type="button" id="btnSearchTracking" class="btn-cta-gold">
+                    &#128269; Lacak Sekarang
+                </button>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+                Petunjuk: Masukkan Nomor Delivery Order (DO) dari <code>dataTracking</code> (contoh: <strong>2023001234</strong> atau <strong>2023005678</strong>).
+            </p>
+        </div>
+
+        <div id="trackingResult" class="tracking-mobile-card">
+            
+            <div class="tracking-blue-header" id="trackingBlueHeader">
+                <div class="tracking-header-name" id="trackNamaMahasiswa">Rina Wulandari</div>
+                <div class="tracking-header-sub" id="trackNomorDO">No. DO: 2023001234</div>
+                <div class="tracking-header-meta">
+                    <span id="trackEkspedisi">JNE &bull; Paket: 0JKT01</span>
+                    <span id="trackTanggal">2025-08-25 &bull; Rp 180.000</span>
+                </div>
+            </div>
+
+            <div class="tracking-timeline-wrap">
+                <div class="tracking-timeline-title">Perjalanan Paket</div>
+                <div class="tracking-stepper" id="trackingTimelineContainer">
+                    
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 <strong>Universitas Terbuka</strong> - SITTA (Sistem Informasi Distribusi Bahan Ajar). Seluruh Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js?v=5"></script>
+</body>
+</html>
+
+

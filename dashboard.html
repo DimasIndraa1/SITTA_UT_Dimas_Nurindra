@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITTA - Dashboard Aplikasi | Universitas Terbuka</title>
+    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="icon" type="image/svg+xml" href="assets/Universitas Terbuka (UT) Logo - Colored - zonalogo.com.svg">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="dashboard.html" class="brand-wrapper">
+                <img src="assets/Universitas Terbuka (UT) Logo - Colored - zonalogo.com.svg" alt="Logo UT" class="brand-logo">
+                <div class="brand-title">
+                    <h1>SITTA UT</h1>
+                    <span>Sistem Informasi Tiras & Distribusi Bahan Ajar</span>
+                </div>
+            </a>
+
+            <nav class="main-nav">
+                <ul>
+                    
+                    <li>
+                        <a href="stok.html" id="navInfoBahanAjar" class="nav-item-link">Informasi Bahan Ajar</a>
+                    </li>
+
+                    <li>
+                        <a href="tracking.html" id="navTracking" class="nav-item-link">Tracking Pengiriman</a>
+                    </li>
+
+                    <li class="dropdown" id="navDropdownLaporan">
+                        <button type="button" class="dropdown-btn" id="btnDropdownLaporan">
+                            Laporan <span style="font-size: 0.75rem;">&#9662;</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#monitoring-do" id="linkMonitoringDO" class="dropdown-link">
+                                    Monitoring Progress DO Bahan Ajar
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#rekap-stok" id="linkRekapBahanAjar" class="dropdown-link">
+                                    Rekap Bahan Ajar
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#histori-transaksi" id="navHistoriTransaksi" class="nav-item-link">
+                            Histori Transaksi Bahan Ajar
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html" class="btn-logout">Keluar</a>
+                    </li>
+                </ul>
+            </div>
+    </header>
+
+    <main class="main-container">
+
+        <section class="dashboard-greeting-card">
+            <div>
+                <h2 class="dashboard-main-title">Dashboard Aplikasi SITTA</h2>
+                <div class="greeting-info-row">
+                    <span class="greeting-badge" id="localGreetingBadge">
+                        <span id="greetingIcon">&#9728;</span>
+                        <span id="greetingText">Selamat pagi</span>
+                    </span>
+                    <span class="greeting-user-display" id="greetingUserDisplay">, Pengguna SITTA</span>
+                    <span class="greeting-meta" id="greetingRoleMeta">&bull; Portal Layanan Bahan Ajar</span>
+                </div>
+            </div>
+            <div>
+                <div class="live-clock-pill">
+                    <span style="font-size: 0.9rem;">&#128344;</span>
+                    <span id="liveLocalClock">--:--:-- WIB</span>
+                </div>
+            </div>
+        </section>
+
+        <div id="tabOverview" class="dashboard-tab-content active-tab">
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Paket Dalam Pengiriman</h3>
+                    <div class="stat-value" id="statPaketKirim">2</div>
+                    <div class="stat-desc">Monitoring DO aktif dari dataTracking</div>
+                </div>
+                <div class="stat-card accent">
+                    <h3>Total Judul Bahan Ajar</h3>
+                    <div class="stat-value" id="statTotalJudul">5</div>
+                    <div class="stat-desc">Katalog modul BMP terdaftar</div>
+                </div>
+                <div class="stat-card success">
+                    <h3>Total Stok Bahan Ajar</h3>
+                    <div class="stat-value" id="statTotalStok">1.587</div>
+                    <div class="stat-desc">Total eksemplar di seluruh UPBJJ</div>
+                </div>
+                <div class="stat-card warning">
+                    <h3>Lokasi Layanan</h3>
+                    <div class="stat-value" id="statLokasiUser" style="font-size: 1.25rem; margin-top: 0.35rem;">UPBJJ Jakarta</div>
+                    <div class="stat-desc" id="statLokasiDesc">Pusat Distribusi Pondok Cabe</div>
+                </div>
+            </div>
+
+            <div class="search-box-modern" style="margin-bottom: 1.5rem; max-width: 100%;">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <input 
+                    type="text" 
+                    id="dashboardSearchInput" 
+                    placeholder="Pencarian Cepat Data SITTA: Ketik No. DO (misal: 2023001234), Nama Mahasiswa, atau Kode Bahan Ajar..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>Monitoring Progress DO Pengiriman Terkini</span>
+                    <a href="#monitoring-do" onclick="switchDashboardTab('tabMonitoringDO')" style="font-size: 0.85rem; color: var(--primary-color); text-decoration: none; font-weight: 600;">
+                        Buka Laporan Lengkap &rarr;
+                    </a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>No. DO</th>
+                                <th>Nama Penerima</th>
+                                <th>Ekspedisi</th>
+                                <th>Tanggal Kirim</th>
+                                <th>Nilai Tagihan</th>
+                                <th>Status Progress</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="overviewDOTableBody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>Pratinjau Stok Bahan Ajar</span>
+                    <a href="stok.html" style="font-size: 0.85rem; color: var(--primary-color); text-decoration: none; font-weight: 600;">
+                        Buka Katalog Stok Lengkap &rarr;
+                    </a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">Cover</th>
+                                <th>Kode Barang</th>
+                                <th>Nama Bahan Ajar</th>
+                                <th>Jenis</th>
+                                <th>Edisi</th>
+                                <th>Lokasi Gudang</th>
+                                <th>Stok Fisik</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="overviewBahanAjarTableBody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tabMonitoringDO" class="dashboard-tab-content">
+            <div class="card">
+                <div class="card-title">
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: var(--dark-blue); margin-bottom: 0.25rem;">
+                            Laporan: Monitoring Progress DO Bahan Ajar
+                        </h3>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); font-weight: normal;">
+                            Pemantauan alur status pengiriman Delivery Order (DO) bahan ajar ke seluruh UPBJJ dan mahasiswa.
+                        </p>
+                    </div>
+                    <div>
+                        <button type="button" class="btn-export" onclick="window.print()">
+                            <span>&#128438;</span> Cetak / Simpan PDF
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive" style="margin-top: 1rem;">
+                    <table class="table-custom" id="tableFullMonitoringDO">
+                        <thead>
+                            <tr>
+                                <th>Nomor DO</th>
+                                <th>Penerima</th>
+                                <th>Paket Lokasi</th>
+                                <th>Ekspedisi</th>
+                                <th>Tanggal Kirim</th>
+                                <th>Total Biaya</th>
+                                <th>Persentase & Status Progress</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fullMonitoringDOTableBody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tabRekapBahanAjar" class="dashboard-tab-content">
+            <div class="card">
+                <div class="card-title">
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: var(--dark-blue); margin-bottom: 0.25rem;">
+                            Laporan: Rekapitulasi Bahan Ajar
+                        </h3>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); font-weight: normal;">
+                            Rekap kuantitas stok bahan ajar, sebaran lokasi penyimpanan, dan status ketersediaan tiras.
+                        </p>
+                    </div>
+                    <div>
+                        <button type="button" class="btn-export" onclick="window.print()">
+                            <span>&#128438;</span> Cetak / Simpan PDF
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stats-grid" style="margin-top: 1rem; margin-bottom: 1.5rem;">
+                    <div class="stat-card success">
+                        <h3>Total Ketersediaan Fisik</h3>
+                        <div class="stat-value" id="rekapTotalEksemplar">1.587 eks</div>
+                        <div class="stat-desc">Akumulasi seluruh modul bahan ajar</div>
+                    </div>
+                    <div class="stat-card accent">
+                        <h3>Jumlah Gudang / UPBJJ</h3>
+                        <div class="stat-value" id="rekapTotalGudang">5 Lokasi</div>
+                        <div class="stat-desc">Jakarta, Surabaya, Malang, Bandung, Pusat</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Status Ketersediaan</h3>
+                        <div class="stat-value" style="font-size: 1.2rem; color: var(--success-color); margin-top: 0.4rem;">
+                            100% Siap Edar
+                        </div>
+                        <div class="stat-desc">Tidak ada bahan ajar yang kosong</div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode Lokasi</th>
+                                <th>Kode Bahan Ajar</th>
+                                <th>Nama Bahan Ajar</th>
+                                <th>Jenis</th>
+                                <th>Edisi</th>
+                                <th>Jumlah Stok</th>
+                                <th>Status Tiras</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rekapBahanAjarTableBody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tabHistoriTransaksi" class="dashboard-tab-content">
+            <div class="card">
+                <div class="card-title">
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: var(--dark-blue); margin-bottom: 0.25rem;">
+                            Histori Transaksi Bahan Ajar
+                        </h3>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); font-weight: normal;">
+                            Catatan riwayat transaksi pengiriman dan mutasi modul bahan ajar ke mahasiswa dan cabang.
+                        </p>
+                    </div>
+                    <div>
+                        <button type="button" class="btn-export" onclick="window.print()">
+                            <span>&#128438;</span> Cetak / Simpan PDF
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive" style="margin-top: 1rem;">
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>No. Transaksi / DO</th>
+                                <th>Nama Penerima</th>
+                                <th>Tanggal Transaksi</th>
+                                <th>Ekspedisi</th>
+                                <th>Kode Paket</th>
+                                <th>Total Nilai</th>
+                                <th>Status Transaksi</th>
+                                <th>Keterangan Terakhir</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historiTransaksiTableBody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="modalDODetail" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; padding: 1.5rem;" onclick="closeModalDO()">
+        <div style="background: #ffffff; border-radius: var(--radius-lg); max-width: 600px; width: 100%; padding: 2rem; max-height: 90vh; overflow-y: auto; position: relative;" onclick="event.stopPropagation()">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                <h3 style="font-size: 1.25rem; color: var(--dark-blue);" id="modalDOTitle">Detail Pengiriman DO</h3>
+                <button type="button" onclick="closeModalDO()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">&times;</button>
+            </div>
+            <div id="modalDOContent">
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="modalPeragaanDetail" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); z-index: 2500; justify-content: center; align-items: center; padding: 1.5rem;" onclick="closePeragaanModal()">
+        <div class="peragaan-card" style="margin: 0; max-height: 90vh; overflow-y: auto; width: 100%; max-width: 460px;" onclick="event.stopPropagation()">
+            <div class="peragaan-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div class="peragaan-title">
+                        <span style="color: #0284c7; cursor: pointer;" onclick="closePeragaanModal()">&lsaquo;</span>
+                        <span>Informasi Bahan Ajar</span>
+                    </div>
+                    <div class="peragaan-subtitle">Peragaan Data Bahan Ajar</div>
+                </div>
+                <button type="button" onclick="closePeragaanModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">&times;</button>
+            </div>
+            <div class="peragaan-cover-wrap">
+                <img id="modalPeragaanCover" src="assets/img/pengantar_komunikasi.jpg" alt="Cover" class="peragaan-cover-img">
+            </div>
+            <div class="peragaan-body" id="modalPeragaanFields">
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="modalCoverPreview" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); z-index: 3000; justify-content: center; align-items: center; padding: 1.5rem;" onclick="closeCoverModal()">
+        <div style="background: #ffffff; border-radius: 12px; padding: 1.5rem; max-width: 440px; text-align: center; position: relative;" onclick="event.stopPropagation()">
+            <button type="button" onclick="closeCoverModal()" style="position: absolute; right: 12px; top: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">&times;</button>
+            <h4 id="modalCoverTitle" style="margin-bottom: 1rem; color: var(--dark-blue); font-size: 1.05rem;">Cover Bahan Ajar</h4>
+            <img id="modalCoverImg" src="" alt="Cover" style="max-width: 100%; height: 280px; object-fit: contain; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 <strong>Universitas Terbuka</strong> - SITTA (Sistem Informasi Distribusi Bahan Ajar). Seluruh Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js?v=5"></script>
+</body>
+</html>
+
+
