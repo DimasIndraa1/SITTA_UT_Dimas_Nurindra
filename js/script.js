@@ -151,7 +151,8 @@ function initAuthSystem() {
                 window.location.href = 'dashboard.html';
             }, 1000);
         } else {
-            showToast('error', '<strong>Email atau password salah!</strong> Silakan periksa kembali atau gunakan akun demo di bawah.');
+            showInlineError(emailEl, 'Email atau password salah.');
+            showInlineError(passEl, 'Email atau password salah.');
         }
     });
 
