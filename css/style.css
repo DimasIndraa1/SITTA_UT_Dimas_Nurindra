@@ -1559,3 +1559,66 @@ select.form-input {
     color: #ffffff;
 }
 
+
+/* Eye toggle password icon - clean no background */
+.input-eye-toggle {
+    background: transparent;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    color: var(--text-secondary);
+}
+
+.input-eye-toggle:hover {
+    color: var(--primary-color);
+    background: rgba(0, 75, 147, 0.05);
+    border-radius: 4px;
+}
+
+.input-eye-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* Danger button for hapus modal */
+.btn-danger {
+    background-color: var(--danger-color);
+    color: #ffffff;
+    border: none;
+    padding: 0.55rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+    background-color: #b91c1c;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+/* Ensure cover preview doesn't show as background */
+.cover-dropzone.is-filled {
+    border-style: solid;
+    background: #f1f5f9;
+}
+
+.cover-dropzone.is-filled .cover-dropzone-info {
+    display: none;
+}
+
+.cover-dropzone.is-filled .cover-preview-img {
+    display: block;
+    max-width: 100%;
+    max-height: 250px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
