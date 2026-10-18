@@ -534,7 +534,7 @@ function renderDashboardData() {
                             title="Klik untuk memperbesar cover"
                         >
                     </td>
-                    <td><strong>${item.kodeBarang}</strong></td>
+                    <td onclick="showPeragaanModal('${item.kodeBarang}')" style="cursor: pointer; color: var(--primary-color); text-decoration: underline;"><strong>${item.kodeBarang}</strong></td>
                     <td>${item.namaBarang}</td>
                     <td><span class="badge badge-info">${item.jenisBarang}</span></td>
                     <td>Ed. ${item.edisi}</td>
@@ -560,7 +560,7 @@ function renderDashboardData() {
                 <tr>
                     <td>${idx + 1}</td>
                     <td>${item.kodeLokasi}</td>
-                    <td><strong>${item.kodeBarang}</strong></td>
+                    <td onclick="showPeragaanModal('${item.kodeBarang}')" style="cursor: pointer; color: var(--primary-color); text-decoration: underline;"><strong>${item.kodeBarang}</strong></td>
                     <td>${item.namaBarang}</td>
                     <td>${item.jenisBarang}</td>
                     <td>Ed. ${item.edisi}</td>
@@ -891,7 +891,7 @@ function initStockFilter() {
                     >
                 </td>
                 <td>${item.kodeLokasi}</td>
-                <td><strong>${item.kodeBarang}</strong></td>
+                <td onclick="showPeragaanModal('${item.kodeBarang}')" style="cursor: pointer; color: var(--primary-color); text-decoration: underline;"><strong>${item.kodeBarang}</strong></td>
                 <td>${item.namaBarang}</td>
                 <td><span class="badge badge-info">${item.jenisBarang}</span></td>
                 <td>Ed. ${item.edisi}</td>
