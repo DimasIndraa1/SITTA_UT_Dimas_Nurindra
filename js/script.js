@@ -538,7 +538,7 @@ function renderDashboardData() {
                     <td>${item.namaBarang}</td>
                     <td><span class="badge badge-info">${item.jenisBarang}</span></td>
                     <td>Ed. ${item.edisi}</td>
-                    <td><code>${item.kodeLokasi}</code></td>
+                    <td>${item.kodeLokasi}</td>
                     <td><strong>${item.stok.toLocaleString('id-ID')} eks</strong></td>
                     <td>
                         <span class="badge ${item.stok > 200 ? 'badge-success' : 'badge-warning'}">
@@ -559,7 +559,7 @@ function renderDashboardData() {
             rekapBahanAjarTbody.innerHTML = dataBahanAjar.map((item, idx) => `
                 <tr>
                     <td>${idx + 1}</td>
-                    <td><code>${item.kodeLokasi}</code></td>
+                    <td>${item.kodeLokasi}</td>
                     <td><strong>${item.kodeBarang}</strong></td>
                     <td>${item.namaBarang}</td>
                     <td>${item.jenisBarang}</td>
@@ -890,7 +890,7 @@ function initStockFilter() {
                         title="Klik untuk memperbesar cover"
                     >
                 </td>
-                <td><code>${item.kodeLokasi}</code></td>
+                <td>${item.kodeLokasi}</td>
                 <td><strong>${item.kodeBarang}</strong></td>
                 <td>${item.namaBarang}</td>
                 <td><span class="badge badge-info">${item.jenisBarang}</span></td>
