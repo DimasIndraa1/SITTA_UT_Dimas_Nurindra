@@ -696,6 +696,29 @@ function renderDashboardData() {
     }
 }
 
+function isOrderDelivered(item) {
+    const status = (item.status || '').toLowerCase();
+    if (status.includes('selesai') || status.includes('diterima')) return true;
+    if (Array.isArray(item.perjalanan) && item.perjalanan.length > 0) {
+        const lastStep = (item.perjalanan[item.perjalanan.length - 1].keterangan || '').toLowerCase();
+        return lastStep.includes('selesai antar') || lastStep.includes('diterima');
+    }
+    return false;
+}
+
+function paketDiterimaPreviewHtml(item) {
+    if (!isOrderDelivered(item)) return '';
+    return `
+        <div style="margin-top: 1rem; padding: 1rem; background: #f0fdf4; border-radius: 8px; border: 1px solid #bbf7d0;">
+            <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; color: #166534;">&#127919; Bukti Penerimaan Paket</h4>
+            <button type="button" onclick="showCoverModal('assets/img/paket diterima.jpg', 'Bukti Penerimaan Paket')" style="display: inline-flex; align-items: center; gap: 0.4rem; background: #166534; color: #ffffff; border: none; border-radius: 6px; padding: 0.55rem 1rem; font-size: 0.9rem; font-weight: 600; cursor: pointer;">
+                &#128065; Lihat Bukti Penerimaan Paket
+            </button>
+            <p style="font-size: 0.8rem; color: #166534; margin-top: 0.75rem;">Paket telah diterima oleh penerima.</p>
+        </div>
+    `;
+}
+
 window.showDODetail = function(nomorDO) {
     if (typeof dataTracking === 'undefined') return;
 
@@ -732,6 +755,7 @@ window.showDODetail = function(nomorDO) {
                 </div>
             `).join('')}
         </div>
+        ${paketDiterimaPreviewHtml(item)}
     `;
 
     modal.style.display = 'flex';
@@ -842,6 +866,13 @@ function initTrackingSearch() {
                     </div>
                 `;
             }).join('');
+        }
+
+        if (timelineContainer && isOrderDelivered(item)) {
+            const previewEl = document.createElement('div');
+            previewEl.style.marginTop = '1rem';
+            previewEl.innerHTML = paketDiterimaPreviewHtml(item);
+            timelineContainer.parentElement.appendChild(previewEl);
         }
 
         if (resultCard) {
