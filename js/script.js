@@ -796,6 +796,7 @@ function initTrackingSearch() {
         if (query === '') {
             showInlineError(trackingInput, 'Silakan masukkan Nomor DO atau Nomor Resi pengiriman.');
             showToast('error', 'Masukkan nomor pengiriman terlebih dahulu.');
+            showEmptyState();
             return;
         }
 
@@ -814,8 +815,11 @@ function initTrackingSearch() {
         if (!item) {
             showInlineError(trackingInput, `Nomor "${query}" tidak ditemukan. Contoh: 2023001234 atau 2023005678.`);
             showToast('error', `Nomor DO / Pengiriman "${query}" tidak ditemukan.`);
+            showEmptyState();
             return;
         }
+
+        showDataContent();
 
         // Hapus inline error jika berhasil
         trackingInput.classList.remove('input-error');
@@ -873,10 +877,30 @@ function initTrackingSearch() {
         }
     };
 
+    const showEmptyState = () => {
+        const empty = document.getElementById('trackingEmptyState');
+        const data = document.getElementById('trackingDataContent');
+        if (empty) empty.style.display = '';
+        if (data) data.style.display = 'none';
+        if (resultCard) {
+            resultCard.style.display = 'block';
+            resultCard.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    const showDataContent = () => {
+        const empty = document.getElementById('trackingEmptyState');
+        const data = document.getElementById('trackingDataContent');
+        if (empty) empty.style.display = 'none';
+        if (data) data.style.display = '';
+    };
+
     trackingBtn.addEventListener('click', performSearch);
 
     if (trackingInput.value.trim() !== '') {
         performSearch();
+    } else {
+        showEmptyState();
     }
 }
 

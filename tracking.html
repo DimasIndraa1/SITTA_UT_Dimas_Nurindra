@@ -75,19 +75,27 @@
 
         <div id="trackingResult" class="tracking-mobile-card">
             
-            <div class="tracking-blue-header" id="trackingBlueHeader">
-                <div class="tracking-header-name" id="trackNamaMahasiswa">Rina Wulandari</div>
-                <div class="tracking-header-sub" id="trackNomorDO">No. DO: 2023001234</div>
-                <div class="tracking-header-meta">
-                    <span id="trackEkspedisi">JNE &bull; Paket: 0JKT01</span>
-                    <span id="trackTanggal">2025-08-25 &bull; Rp 180.000</span>
-                </div>
+            <div id="trackingEmptyState" style="display:none; text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
+                <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">&#128204;</div>
+                <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;">Belum ada data pengiriman</div>
+                <div style="font-size: 0.85rem;">Masukkan Nomor DO lalu klik Lacak Sekarang untuk menampilkan riwayat paket.</div>
             </div>
 
-            <div class="tracking-timeline-wrap">
-                <div class="tracking-timeline-title">Perjalanan Paket</div>
-                <div class="tracking-stepper" id="trackingTimelineContainer">
-                    
+            <div id="trackingDataContent" style="display:none;">
+                <div class="tracking-blue-header" id="trackingBlueHeader">
+                    <div class="tracking-header-name" id="trackNamaMahasiswa">Rina Wulandari</div>
+                    <div class="tracking-header-sub" id="trackNomorDO">No. DO: 2023001234</div>
+                    <div class="tracking-header-meta">
+                        <span id="trackEkspedisi">JNE &bull; Paket: 0JKT01</span>
+                        <span id="trackTanggal">2025-08-25 &bull; Rp 180.000</span>
+                    </div>
+                </div>
+
+                <div class="tracking-timeline-wrap">
+                    <div class="tracking-timeline-title">Perjalanan Paket</div>
+                    <div class="tracking-stepper" id="trackingTimelineContainer">
+                        
+                    </div>
                 </div>
             </div>
         </div>
