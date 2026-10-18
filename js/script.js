@@ -104,27 +104,48 @@ function initAuthSystem() {
 
     formLogin.addEventListener('submit', (e) => {
         e.preventDefault();
+        clearInlineErrors(formLogin);
+
         const emailInput = document.getElementById('loginEmail').value.trim().toLowerCase();
         const passwordInput = document.getElementById('loginPassword').value.trim();
+        const emailEl = document.getElementById('loginEmail');
+        const passEl = document.getElementById('loginPassword');
+
+        let hasError = false;
+
+        if (!emailInput) {
+            showInlineError(emailEl, 'Email wajib diisi.');
+            hasError = true;
+        } else if (!emailInput.includes('@')) {
+            showInlineError(emailEl, 'Masukkan alamat email yang valid (harus mengandung @).');
+            hasError = true;
+        }
+
+        if (!passwordInput) {
+            showInlineError(passEl, 'Kata sandi wajib diisi.');
+            hasError = true;
+        }
+
+        if (hasError) return;
 
         if (typeof dataPengguna === 'undefined' || !Array.isArray(dataPengguna)) {
-            showAlert(loginAlert, 'error', 'Data pengguna tidak ditemukan. Pastikan data.js terpasang dengan benar.');
+            showToast('error', 'Data pengguna tidak ditemukan. Pastikan data.js terpasang dengan benar.');
             return;
         }
 
         const user = dataPengguna.find(u => u.email.toLowerCase() === emailInput && u.password === passwordInput);
 
         if (user) {
-            showAlert(loginAlert, 'success', `<strong>Login Berhasil!</strong> Selamat datang, ${user.nama} (${user.role}). Mengalihkan ke Dashboard...`);
+            showToast('success', `<strong>Login Berhasil!</strong> Selamat datang, ${user.nama} (${user.role}). Mengalihkan ke Dashboard...`);
 
             sessionStorage.setItem('sitta_logged_in_user', JSON.stringify(user));
             sessionStorage.setItem('sitta_user', user.nama);
 
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
-            }, 750);
+            }, 1000);
         } else {
-            showAlert(loginAlert, 'error', '<strong>Email atau password salah!</strong> Silakan periksa kembali atau gunakan akun demo di bawah.');
+            showToast('error', '<strong>Email atau password salah!</strong> Silakan periksa kembali atau gunakan akun demo di bawah.');
         }
     });
 
@@ -143,7 +164,7 @@ function initAuthSystem() {
             matchedUser = dataPengguna.find(u => u.email.toLowerCase() === emailInput);
 
             if (matchedUser) {
-                showAlert(forgotAlert, 'success', `<strong>Akun Ditemukan!</strong><br>Nama: ${matchedUser.nama}<br>Role: ${matchedUser.role} (${matchedUser.lokasi})`);
+                showToast('success', `<strong>Akun Ditemukan!</strong> Nama: ${matchedUser.nama}, Role: ${matchedUser.role} (${matchedUser.lokasi})`);
                 
                 if (forgotResetSection && forgotUserFoundText) {
                     forgotResetSection.style.display = 'block';
@@ -151,7 +172,7 @@ function initAuthSystem() {
                 }
             } else {
                 if (forgotResetSection) forgotResetSection.style.display = 'none';
-                showAlert(forgotAlert, 'error', `Email <strong>${emailInput}</strong> tidak terdaftar dalam sistem SITTA.`);
+                showToast('error', `Email ${emailInput} tidak terdaftar dalam sistem SITTA.`);
             }
         });
     }
@@ -160,7 +181,7 @@ function initAuthSystem() {
         btnSaveNewPassword.addEventListener('click', () => {
             const newPassword = document.getElementById('forgotNewPassword').value.trim();
             if (!newPassword) {
-                alert('Silakan masukkan kata sandi baru.');
+                showToast('error', 'Silakan masukkan kata sandi baru.');
                 return;
             }
 
@@ -176,7 +197,7 @@ function initAuthSystem() {
                     }
                 } catch (e) {}
 
-                showAlert(forgotAlert, 'success', `Kata sandi berhasil diperbarui menjadi: <strong>${newPassword}</strong>! Silakan kembali ke menu login.`);
+                showToast('success', `Kata sandi berhasil diperbarui menjadi: <strong>${newPassword}</strong>! Silakan kembali ke menu login.`);
                 if (forgotResetSection) forgotResetSection.style.display = 'none';
 
                 document.getElementById('loginEmail').value = matchedUser.email;
@@ -189,6 +210,7 @@ function initAuthSystem() {
     if (formRegister) {
         formRegister.addEventListener('submit', (e) => {
             e.preventDefault();
+            clearInlineErrors(formRegister);
 
             const nama = document.getElementById('regNama').value.trim();
             const email = document.getElementById('regEmail').value.trim().toLowerCase();
@@ -197,14 +219,43 @@ function initAuthSystem() {
             const password = document.getElementById('regPassword').value.trim();
             const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
 
-            if (password !== confirmPassword) {
-                showAlert(registerAlert, 'error', 'Konfirmasi kata sandi tidak cocok. Harap periksa kembali.');
-                return;
+            const namaEl = document.getElementById('regNama');
+            const emailEl = document.getElementById('regEmail');
+            const passEl = document.getElementById('regPassword');
+            const confirmEl = document.getElementById('regConfirmPassword');
+
+            let hasError = false;
+
+            if (!nama) {
+                showInlineError(namaEl, 'Nama lengkap wajib diisi.');
+                hasError = true;
             }
+            if (!email) {
+                showInlineError(emailEl, 'Email wajib diisi.');
+                hasError = true;
+            } else if (!email.includes('@')) {
+                showInlineError(emailEl, 'Masukkan alamat email yang valid.');
+                hasError = true;
+            }
+            if (!password) {
+                showInlineError(passEl, 'Kata sandi wajib diisi.');
+                hasError = true;
+            }
+            if (!confirmPassword) {
+                showInlineError(confirmEl, 'Konfirmasi kata sandi wajib diisi.');
+                hasError = true;
+            }
+            if (password && confirmPassword && password !== confirmPassword) {
+                showInlineError(confirmEl, 'Konfirmasi kata sandi tidak cocok.');
+                hasError = true;
+            }
+
+            if (hasError) return;
 
             const alreadyExists = dataPengguna.some(u => u.email.toLowerCase() === email);
             if (alreadyExists) {
-                showAlert(registerAlert, 'error', `Email <strong>${email}</strong> sudah terdaftar! Silakan login atau gunakan email lain.`);
+                showInlineError(emailEl, `Email <strong>${email}</strong> sudah terdaftar!`);
+                showToast('error', `Email ${email} sudah terdaftar! Silakan login atau gunakan email lain.`);
                 return;
             }
 
@@ -230,7 +281,7 @@ function initAuthSystem() {
             formRegister.reset();
 
             showView(loginView);
-            showAlert(loginAlert, 'success', `<strong>Pendaftaran Berhasil!</strong> Akun untuk <strong>${nama}</strong> (${email}) telah dibuat. Silakan klik Masuk.`);
+            showToast('success', `<strong>Pendaftaran Berhasil!</strong> Akun untuk <strong>${nama}</strong> (${email}) telah dibuat. Silakan klik Masuk.`);
 
             document.getElementById('loginEmail').value = email;
             document.getElementById('loginPassword').value = password;
@@ -716,7 +767,8 @@ function initTrackingSearch() {
     const performSearch = () => {
         const query = trackingInput.value.trim();
         if (query === '') {
-            alert('Silakan masukkan Nomor DO atau Nomor Resi pengiriman.');
+            showInlineError(trackingInput, 'Silakan masukkan Nomor DO atau Nomor Resi pengiriman.');
+            showToast('error', 'Masukkan nomor pengiriman terlebih dahulu.');
             return;
         }
 
@@ -733,9 +785,15 @@ function initTrackingSearch() {
         }
 
         if (!item) {
-            alert(`Nomor DO / Pengiriman "${query}" tidak ditemukan dalam dataTracking. Silakan gunakan nomor contoh: 2023001234 atau 2023005678.`);
+            showInlineError(trackingInput, `Nomor "${query}" tidak ditemukan. Contoh: 2023001234 atau 2023005678.`);
+            showToast('error', `Nomor DO / Pengiriman "${query}" tidak ditemukan.`);
             return;
         }
+
+        // Hapus inline error jika berhasil
+        trackingInput.classList.remove('input-error');
+        const err = trackingInput.parentElement.querySelector('.inline-error');
+        if (err) err.remove();
 
         const trackNama = document.getElementById('trackNamaMahasiswa');
         const trackNomor = document.getElementById('trackNomorDO');
@@ -1014,7 +1072,7 @@ function initTambahBahanAjar() {
         if (dropzone) dropzone.classList.add('is-filled');
     };
 
-    const rejectCover = (message) => {
+    const         rejectCover = (message) => {
         if (fields.cover) fields.cover.value = '';
         if (previewImg) previewImg.hidden = true;
         if (dropTitle) dropTitle.textContent = 'Klik untuk memilih gambar cover';
@@ -1024,7 +1082,7 @@ function initTambahBahanAjar() {
             dropzone.classList.remove('is-filled');
             dropzone.classList.add('is-error');
         }
-        showAlert('error', message);
+        showToast('error', message);
     };
 
     const handleCoverChange = () => {
@@ -1046,7 +1104,7 @@ function initTambahBahanAjar() {
         }
 
         showCoverBox(file);
-        showAlert('info', '');
+        showToast('info', '');
     };
 
     if (dropzone) {
@@ -1166,20 +1224,78 @@ function initTambahBahanAjar() {
 
         if (!kodeLokasi || !kodeBarang || !namaBarang || Number.isNaN(edisi) || Number.isNaN(stok)) {
             Object.values(fields).forEach(el => el && el.classList.add('input-error'));
-            showAlert('error', 'Semua kolom wajib diisi, dan Edisi serta Jumlah Stok harus berupa angka.');
+            // Inline error messages
+            const showFieldError = (el, msg) => {
+                if (!el) return;
+                el.classList.add('input-error');
+                const parent = el.parentElement;
+                const existing = parent.querySelector('.inline-error');
+                if (existing) existing.remove();
+                const err = document.createElement('span');
+                err.className = 'inline-error';
+                err.textContent = msg;
+                parent.appendChild(err);
+                el.addEventListener('input', function() {
+                    el.classList.remove('input-error');
+                    const e = el.parentElement.querySelector('.inline-error');
+                    if (e) e.remove();
+                }, { once: true });
+            };
+            if (!kodeLokasi) showFieldError(fields.kodeLokasi, 'Kode Lokasi wajib diisi.');
+            if (!kodeBarang) showFieldError(fields.kodeBarang, 'Kode Barang wajib diisi.');
+            if (!namaBarang) showFieldError(fields.namaBarang, 'Nama Bahan Ajar wajib diisi.');
+            if (Number.isNaN(edisi)) showFieldError(fields.edisi, 'Edisi harus berupa angka.');
+            if (Number.isNaN(stok)) showFieldError(fields.stok, 'Jumlah Stok harus berupa angka.');
+            showToast('error', 'Semua kolom wajib diisi, dan Edisi serta Jumlah Stok harus berupa angka.');
             return;
         }
 
         if (edisi < 1 || stok < 0) {
             fields.edisi.classList.add('input-error');
             fields.stok.classList.add('input-error');
-            showAlert('error', 'Edisi minimal 1 dan Jumlah Stok tidak boleh negatif.');
+            const parentE = fields.edisi.parentElement;
+            const existingE = parentE.querySelector('.inline-error');
+            if (existingE) existingE.remove();
+            const errE = document.createElement('span');
+            errE.className = 'inline-error';
+            errE.textContent = 'Edisi minimal 1.';
+            parentE.appendChild(errE);
+            fields.edisi.addEventListener('input', function() {
+                fields.edisi.classList.remove('input-error');
+                const e = fields.edisi.parentElement.querySelector('.inline-error');
+                if (e) e.remove();
+            }, { once: true });
+            const parentS = fields.stok.parentElement;
+            const existingS = parentS.querySelector('.inline-error');
+            if (existingS) existingS.remove();
+            const errS = document.createElement('span');
+            errS.className = 'inline-error';
+            errS.textContent = 'Jumlah Stok tidak boleh negatif.';
+            parentS.appendChild(errS);
+            fields.stok.addEventListener('input', function() {
+                fields.stok.classList.remove('input-error');
+                const e = fields.stok.parentElement.querySelector('.inline-error');
+                if (e) e.remove();
+            }, { once: true });
+            showToast('error', 'Edisi minimal 1 dan Jumlah Stok tidak boleh negatif.');
             return;
         }
 
         if (isDuplicate) {
             fields.kodeBarang.classList.add('input-error');
-            showAlert('error', `Kode Barang <strong>${kodeBarang}</strong> sudah terdaftar. Gunakan kode lain.`);
+            const parentK = fields.kodeBarang.parentElement;
+            const existingK = parentK.querySelector('.inline-error');
+            if (existingK) existingK.remove();
+            const errK = document.createElement('span');
+            errK.className = 'inline-error';
+            errK.textContent = `Kode Barang ${kodeBarang} sudah terdaftar.`;
+            parentK.appendChild(errK);
+            fields.kodeBarang.addEventListener('input', function() {
+                fields.kodeBarang.classList.remove('input-error');
+                const e = fields.kodeBarang.parentElement.querySelector('.inline-error');
+                if (e) e.remove();
+            }, { once: true });
+            showToast('error', `Kode Barang <strong>${kodeBarang}</strong> sudah terdaftar. Gunakan kode lain.`);
             return;
         }
 
@@ -1404,5 +1520,63 @@ window.closeTableActionDropdowns = function() {
 };
 
 document.addEventListener('click', closeTableActionDropdowns);
+
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
+window.showToast = function(type, message) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+
+    const iconMap = {
+        success: '&#10004;',
+        error: '&#10008;',
+        info: '&#9432;'
+    };
+
+    toast.innerHTML = `
+        <span class="toast-icon">${iconMap[type] || iconMap.info}</span>
+        <div class="toast-body">${message}</div>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+};
+
+/* ==========================================================================
+   INLINE ERROR HELPER
+   ========================================================================== */
+window.showInlineError = function(inputEl, message) {
+    if (!inputEl) return;
+    inputEl.classList.add('input-error');
+
+    // Hapus inline error lama jika ada
+    const existing = inputEl.parentElement.querySelector('.inline-error');
+    if (existing) existing.remove();
+
+    const errorEl = document.createElement('span');
+    errorEl.className = 'inline-error';
+    errorEl.textContent = message;
+    inputEl.parentElement.appendChild(errorEl);
+
+    inputEl.addEventListener('input', function clear() {
+        inputEl.classList.remove('input-error');
+        const err = inputEl.parentElement.querySelector('.inline-error');
+        if (err) err.remove();
+        inputEl.removeEventListener('input', clear);
+    }, { once: true });
+};
+
+window.clearInlineErrors = function(formEl) {
+    if (!formEl) return;
+    formEl.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+    formEl.querySelectorAll('.inline-error').forEach(el => el.remove());
+};
 
 
