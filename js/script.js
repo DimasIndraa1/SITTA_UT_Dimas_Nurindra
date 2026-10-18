@@ -844,11 +844,15 @@ function initTrackingSearch() {
             timelineContainer.innerHTML = logs.map((step, idx) => {
                 let mainDesc = step.keterangan;
                 let subDesc = '';
+                let bukitBox = '';
 
                 if (step.keterangan.includes('. Penerima:')) {
                     const parts = step.keterangan.split('. Penerima:');
                     mainDesc = parts[0];
                     subDesc = 'Penerima: ' + parts[1].trim();
+                    if (isOrderDelivered(item)) {
+                        bukitBox = paketDiterimaPreviewHtml(item);
+                    }
                 } else if (step.keterangan.includes('. Pengirim:')) {
                     const parts = step.keterangan.split('. Pengirim:');
                     mainDesc = parts[0];
@@ -864,15 +868,9 @@ function initTrackingSearch() {
                         </div>
                         <div class="tracking-step-time">${step.waktu}</div>
                     </div>
+                    ${bukitBox}
                 `;
             }).join('');
-        }
-
-        if (timelineContainer && isOrderDelivered(item)) {
-            const previewEl = document.createElement('div');
-            previewEl.style.marginTop = '1rem';
-            previewEl.innerHTML = paketDiterimaPreviewHtml(item);
-            timelineContainer.parentElement.appendChild(previewEl);
         }
 
         if (resultCard) {
