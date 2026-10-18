@@ -2,6 +2,12 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     
+    // Tampilkan toast logout jika ada
+    if (sessionStorage.getItem('sitta_logout_toast') === '1') {
+        sessionStorage.removeItem('sitta_logout_toast');
+        setTimeout(() => showToast('success', 'Anda telah logout dari sistem SITTA.'), 100);
+    }
+
     initPasswordToggles();
 
     syncCustomUsers();
@@ -1520,6 +1526,17 @@ window.closeTableActionDropdowns = function() {
 };
 
 document.addEventListener('click', closeTableActionDropdowns);
+
+/* Logout toast */
+document.querySelectorAll('.btn-logout').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        sessionStorage.setItem('sitta_logout_toast', '1');
+        sessionStorage.removeItem('sitta_logged_in_user');
+        sessionStorage.removeItem('sitta_user');
+        window.location.href = btn.getAttribute('href') || 'index.html';
+    });
+});
 
 /* ==========================================================================
    TOAST NOTIFICATION
