@@ -1437,3 +1437,125 @@ body {
     opacity: 0.8;
 }
 
+
+/* Form Tambah Bahan Ajar */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem 1.5rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-field.form-field-full {
+    grid-column: 1 / -1;
+}
+
+.form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-optional {
+    font-weight: 400;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-left: 0.4rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.form-input::placeholder {
+    color: var(--text-muted);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+select.form-input {
+    cursor: pointer;
+}
+
+.cover-field {
+    margin-top: 0.5rem;
+}
+
+.cover-dropzone {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.cover-dropzone:hover {
+    border-color: #0284c7;
+    background: #f1f5f9;
+}
+
+.cover-dropzone-info {
+    margin-top: 0.5rem;
+}
+
+.cover-dropzone-info strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.cover-dropzone-info span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.cover-preview-img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 0.75rem;
+}
+
+.cover-clear-btn {
+    background: #fee2e2;
+    color: #991b1b;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+}
+
+.cover-clear-btn:hover {
+    background: #ef4444;
+    color: #ffffff;
+}
+
